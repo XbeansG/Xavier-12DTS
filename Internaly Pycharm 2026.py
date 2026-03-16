@@ -15,10 +15,6 @@ loop = True
 EXPEL_TIME = 12
 KEY_ESCAPE_GATE = 1
 tower_block_level_1_pass = 1
-tower_block_level_2_pass = 1
-tower_block_level_3_pass = 1
-tower_block_level_4_pass = 1
-tower_block_level_5_pass = 1
 tower_block_level_6_gate_key = 1
 
 #Variables:
@@ -31,6 +27,49 @@ level_1_pass_desicion = ""
 
 #Functions:
 #----------
+def start_menu():
+    loop_control = True
+
+    while loop_control:
+        try:
+            slow_text("====WELLINGTON COLLEGE ESCAPE=====")
+            print()
+            print()
+            print()
+            time.sleep(1)
+
+            slow_text("1. Start (Enter 1)")
+            print()
+            print()
+
+            slow_text("2. Introduction (Enter 2)")
+            print()
+            print()
+
+            slow_text("3. Quit (Enter 3) ")
+            print()
+            print()
+
+            start_menu_choice = int(input("Enter your choice: "))
+
+            if start_menu_choice == 1:
+                loop_control = False
+
+            elif start_menu_choice == 2:
+                introduction()
+                loop_control = False
+
+            elif start_menu_choice == 3:
+                exit()
+            else:
+                slow_text("You have to enter 1, 2 or 3")
+                print()
+
+        except ValueError:
+            slow_text("Enter an integer, ever 1, 2 or 3")
+            print()
+
+
 
 def introduction():
     slow_text("Before you play the best game of your life I need to know 1 thing from you...")
@@ -89,18 +128,6 @@ def tower_block_level_1():
     time.sleep(1)
     slow_text("you are inside a tech classroom, quickly search the class for a pass before you are found...")
 
-def tower_block_level_2():
-    print()
-def tower_block_level_3():
-    print()
-def tower_block_level_4():
-    print()
-def tower_block_level_5():
-    print()
-
-def tower_block_level_6():
-    print()
-
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
 def slow_text(text: str, speed = 10000.02):
     for letter in text:
@@ -109,6 +136,7 @@ def slow_text(text: str, speed = 10000.02):
 
 #Main Loop:
 #----------
+start_menu()
 introduction()
 tower_block()
-cortisol_check()
+
