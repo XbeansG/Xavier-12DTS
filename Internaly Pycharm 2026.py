@@ -168,6 +168,9 @@ def cortisol_check():
         slow_text(f"You have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
         print()
 
+def map():
+    print()
+
 
 #levels
 def tower_block():
@@ -186,7 +189,8 @@ def slow_text(text: str, speed = 0.02):
 
 #Main Loop:
 #----------
-status()
+map()
 start_menu()
 tower_block()
+status()
 
