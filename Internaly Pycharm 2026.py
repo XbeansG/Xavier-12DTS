@@ -28,8 +28,7 @@ display_updated_status = ""
 
 #Functions:
 #----------
-def start_menu():
-    loop_control = True
+def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
     print()
     print()
@@ -46,6 +45,8 @@ def start_menu():
     #time.sleep(3)
     print()
     print()
+def start_menu():
+    loop_control = True
 
     while loop_control:
         try:
@@ -69,6 +70,7 @@ def start_menu():
 
             elif start_menu_choice == 2:
                 introduction()
+                start_menu()
                 loop_control = False
 
             elif start_menu_choice == 3:
@@ -182,7 +184,7 @@ def tower_block():
     slow_text("you are inside a tech classroom, quickly search the class for a pass before you are found...")
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.03):
+def slow_text(text: str, speed = 10000.03):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
@@ -190,6 +192,7 @@ def slow_text(text: str, speed = 0.03):
 #Main Loop:
 #----------
 map()
+name_start()
 start_menu()
 tower_block()
 status()
