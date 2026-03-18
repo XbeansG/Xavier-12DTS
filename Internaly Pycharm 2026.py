@@ -146,7 +146,7 @@ def introduction():
     print()
     slow_text("Be careful as every move costs you time and can increase your cortisol...")
     print()
-    slow_text("Make your way to the very top of the tower block where the almighty key is stored so you can unlock the school gate before it clocks midnight...")
+    slow_text("Solve riddles and avoid danger to find the almighty key so you can unlock the school gate before it clocks midnight...")
     print()
     #time.sleep(1)
     slow_text(f"Good luck {name}.")
@@ -184,7 +184,7 @@ def tower_block():
     slow_text("you are inside a tech classroom, quickly search the class for a pass before you are found...")
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 10000.03):
+def slow_text(text: str, speed = 0.0000000003):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
