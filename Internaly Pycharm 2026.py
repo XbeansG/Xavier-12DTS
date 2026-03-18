@@ -182,10 +182,10 @@ def tower_block():
     slow_text("you are inside a tech classroom, quickly search the class for a pass before you are found...")
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.02):
+def slow_text(text: str, speed = 0.03):
     for letter in text:
         print(letter, end = '')
-        time.sleep(0.001/speed)
+        time.sleep(speed)
 
 #Main Loop:
 #----------
