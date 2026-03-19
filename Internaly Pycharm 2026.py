@@ -22,12 +22,15 @@ player_time = 5 #expel time = 12
 player_cortisol = 0
 player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
 name = ""
-level_1_pass_desicion = ""
+find_map = ""
 start_menu_choice = ""
 display_updated_status = ""
 
 #Functions:
-#----------
+#---------
+
+# Start/set up section of code
+#-----------------------------
 def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
     print()
@@ -175,13 +178,71 @@ def map():
 
 
 #levels
+#------
+#tower block
+#-----------
 def tower_block():
     slow_text("You wake up in first floor of tower block.")
     print()
-    slow_text("You must find a elevator pass to the second floor,")
-    print()
     #time.sleep(1)
-    slow_text("you are inside a tech classroom, quickly search the class for a pass before you are found...")
+    slow_text("you are inside a tech classroom, quickly search the class for a school map before you are found...")
+    print()
+    print()
+
+    loop_control = True
+    while loop_control:
+        try:
+            slow_text("1. Search the rubbish bin (Enter 1)")
+            print()
+            print()
+
+            slow_text("2. Search the teacher's draws (Enter 2)")
+            print()
+            print()
+
+            slow_text("3. Search the electronics storage system (Enter 3) ")
+            print()
+            print()
+
+            find_map = int(input("Enter your choice on where you want to go: "))
+
+            if find_map == 1:
+                print()
+                print()
+                find_map_choice_1()
+                loop_control = False
+
+            elif find_map == 2:
+                print()
+                print()
+                find_map_choice_2()
+                loop_control = False
+
+            elif find_map == 3:
+                print()
+                print()
+                find_map_choice_3()
+                loop_control = False
+
+            else:
+                slow_text("You have to enter 1, 2 or 3")
+                print()
+
+        except ValueError:
+            slow_text("Enter an integer, ever 1, 2 or 3")
+            print()
+
+#sub-functions for towerblock
+#----------------------------
+
+def find_map_choice_1():
+    print()
+
+def find_map_choice_2():
+    print()
+
+def find_map_choice_3():
+    print()
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
 def slow_text(text: str, speed = 0.0000000003):
