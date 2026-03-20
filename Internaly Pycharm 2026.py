@@ -284,6 +284,7 @@ def find_map_choice_1():
             print()
             slow_text(f"Smart decision {name}.")
             loop_control = False
+            #make player chose again
 
 
         else:
