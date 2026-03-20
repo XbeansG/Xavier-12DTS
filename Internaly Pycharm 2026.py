@@ -170,7 +170,7 @@ def introduction():
     slow_text("Solve riddles and avoid danger to find the almighty key so you can unlock the school gate before it clocks midnight...")
     print()
     #time.sleep(1)
-    slow_text(f"Good luck {name}.")
+    print(f"Good luck {name}.")
     print()
     print()
     print()
@@ -188,7 +188,7 @@ def cortisol_check():
         exit()
     else:
         print()
-        slow_text(f"You have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
+        slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
         print()
 
 def map():
@@ -272,8 +272,9 @@ def find_map_choice_1():
             slow_text("You dodge just in time but your cortisol spikes!!!")
             print()
             print()
+            global player_cortisol
             player_cortisol =+20
-            slow_text(f"You now have a cortisol level of {player_cortisol}.")
+            cortisol_check()
             space()
 
 
@@ -303,7 +304,7 @@ def find_map_choice_3():
     print()
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.0000000003):
+def slow_text(text: str, speed = 0.000000003):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
