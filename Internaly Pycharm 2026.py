@@ -22,15 +22,33 @@ player_time = 5 #expel time = 12
 player_cortisol = 0
 player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
 name = ""
+display_updated_status = ""
+
+#Decision variables
 find_map = ""
 start_menu_choice = ""
-display_updated_status = ""
+search_bin = ""
 
 #Functions:
 #---------
 
 # Start/set up section of code
 #-----------------------------
+def space():
+    print()
+    print()
+    print()
+    print()
+def sleep_1_and_space():
+    print()
+    print()
+    time.sleep(1)
+
+def sleep_3_and_space():
+    print()
+    print()
+    time.sleep(3)
+
 def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
     print()
@@ -184,7 +202,6 @@ def map():
 def tower_block():
     slow_text("You wake up in first floor of tower block.")
     print()
-    #time.sleep(1)
     slow_text("you are inside a tech classroom, quickly search the class for a school map before you are found...")
     print()
     print()
@@ -237,6 +254,46 @@ def tower_block():
 
 def find_map_choice_1():
     print()
+    slow_text("You walk over to the rubbish bin...")
+    print()
+    slow_text("but once you arrive there is a strange, rotten smell coming from it...")
+    print()
+    print()
+    loop_control = True
+    while loop_control == True:
+        search_bin = int(input("Enter (1) if you still want to search bin, or enter (2) if you want to search somewhere else: "))
+        if search_bin == 1:
+            print()
+            print()
+            slow_text("You start removing trash from the rubbish bin...")
+            print()
+            slow_text("Out of no where a rat jumps out of the bin and trys to attack you!!!")
+            print()
+            slow_text("You dodge just in time but your cortisol spikes!!!")
+            print()
+            print()
+            player_cortisol =+20
+            slow_text(f"You now have a cortisol level of {player_cortisol}.")
+            space()
+
+
+            loop_control = False
+
+        elif search_bin == 2:
+            print()
+            print()
+            slow_text(f"Smart decision {name}.")
+            loop_control = False
+
+
+        else:
+            print()
+            print()
+            slow_text("You have to enter 1 or 2")
+            loop_control = True
+
+
+
 
 def find_map_choice_2():
     print()
