@@ -18,6 +18,8 @@ tower_block_level_6_gate_key = 1
 
 #Variables:
 #----------
+inventory = []
+
 player_time = 5 #expel time = 12
 player_cortisol = 0
 player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
@@ -192,7 +194,7 @@ def cortisol_check():
         print()
 
 def map():
-    print()
+    print("")
 
 
 #levels
