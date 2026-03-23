@@ -278,6 +278,9 @@ def find_map_choice_1():
             player_cortisol =+20
             cortisol_check()
             space()
+            slow_text("You go back to the bin, but find no map.")
+            print()
+            slow_text("It is your lucky day though as you found ")
 
 
             loop_control = False
