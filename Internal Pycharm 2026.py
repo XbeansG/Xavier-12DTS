@@ -37,7 +37,7 @@ search_bin = ""
 #Functions:
 #---------
 
-# Start/set up section of code
+#Set up section of code
 #-----------------------------
 def space():
     print()
@@ -48,17 +48,79 @@ def sleep_1_and_space():
     print()
     print()
     time.sleep(1)
-
 def sleep_3_and_space():
     print()
     print()
     time.sleep(3)
 
+def map():
+    print("")
+
 def get_available_options(all_options, searched_locations):
     global available_options
     return [option for option in all_options if option not in searched_locations]
+def status():
+    loop_control = True
+    while loop_control:
+        try:
+            slow_text("1. Cortisol level (Enter 1)")
+            print()
+            print()
 
+            slow_text("2. Current time (Enter 2)")
+            print()
+            print()
 
+            slow_text("3. Map (Enter 3) ")
+            print()
+            print()
+            #time.sleep(1)
+            slow_text("3. Current inventory (Enter 4) ")
+            print()
+            print()
+
+            display_updated_status = int(input("Enter your choice: "))
+
+            if display_updated_status == 1:
+                cortisol_check()
+                print()
+                print()
+                loop_control = False
+
+            elif display_updated_status == 2:
+                slow_text(f"The current time is {player_time}PM.")
+                print()
+                print()
+                loop_control = False
+
+            elif display_updated_status == 3:
+                exit()
+
+            elif display_updated_status == 4:
+                exit()
+            else:
+                slow_text("You have to enter 1, 2, 3 or 4")
+                print()
+
+        except ValueError:
+            slow_text("Enter an integer, ever 1, 2, 3 or 4")
+            print()
+def cortisol_check():
+    print()
+    if player_cortisol >= 100:
+        slow_text(f"{name}, Your cortisol levels exceeded the limit and you pass out.")
+        print()
+        #time.sleep(2)
+        slow_text("You wake up in Mr Denham's office...")
+        print()
+        slow_text("I am not angry, I am just dissapointed, you are expelled!!!")
+        exit()
+    else:
+        print()
+        slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
+        print()
+
+#Start/introduction functions
 def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
     print()
@@ -114,56 +176,6 @@ def start_menu():
             slow_text("Enter an integer, ever 1, 2 or 3")
             print()
 
-def status():
-    loop_control = True
-    while loop_control:
-        try:
-            slow_text("1. Cortisol level (Enter 1)")
-            print()
-            print()
-
-            slow_text("2. Current time (Enter 2)")
-            print()
-            print()
-
-            slow_text("3. Map (Enter 3) ")
-            print()
-            print()
-            #time.sleep(1)
-            slow_text("3. Current inventory (Enter 4) ")
-            print()
-            print()
-
-            display_updated_status = int(input("Enter your choice: "))
-
-            if display_updated_status == 1:
-                cortisol_check()
-                print()
-                print()
-                loop_control = False
-
-            elif display_updated_status == 2:
-                slow_text(f"The current time is {player_time}PM.")
-                print()
-                print()
-                loop_control = False
-
-            elif display_updated_status == 3:
-                exit()
-
-            elif display_updated_status == 4:
-                exit()
-            else:
-                slow_text("You have to enter 1, 2, 3 or 4")
-                print()
-
-        except ValueError:
-            slow_text("Enter an integer, ever 1, 2, 3 or 4")
-            print()
-
-
-
-
 def introduction():
     #time.sleep(2)
     slow_text("First of all you will need to understand the situation you are placed in...")
@@ -185,24 +197,6 @@ def introduction():
     print()
     print()
     #time.sleep(3)
-
-def cortisol_check():
-    print()
-    if player_cortisol >= 100:
-        slow_text(f"{name}, Your cortisol levels exceeded the limit and you pass out.")
-        print()
-        #time.sleep(2)
-        slow_text("You wake up in Mr Denham's office...")
-        print()
-        slow_text("I am not angry, I am just dissapointed, you are expelled!!!")
-        exit()
-    else:
-        print()
-        slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
-        print()
-
-def map():
-    print("")
 
 
 #levels
@@ -273,7 +267,6 @@ def tower_block_search():
 
 #sub-functions for towerblock
 #----------------------------
-
 def find_map_choice_1():
     print()
     slow_text("You walk over to the rubbish bin...")
@@ -302,8 +295,8 @@ def find_map_choice_1():
             print()
             slow_text("It is your lucky day though as you found a lab note.")
             inventory.append("lab note")
-            space()
             loop_control = False
+            space()
             tower_block_search()
 
 
@@ -312,21 +305,16 @@ def find_map_choice_1():
             print()
             slow_text(f"Smart decision {name}.")
             loop_control = False
-            #make player chose again
-
+            space()
+            tower_block_search()
 
         else:
             print()
             print()
             slow_text("You have to enter 1 or 2")
             loop_control = True
-
-
-
-
 def find_map_choice_2():
     print()
-
 def find_map_choice_3():
     print()
 
@@ -338,7 +326,7 @@ def slow_text(text: str, speed = 0.00003):
 
 #Main Loop:
 #----------
-map()
+#make map()!!!
 name_start()
 start_menu()
 tower_block()
