@@ -13,8 +13,6 @@ loop = True
 #Constants:
 #----------
 KEY_ESCAPE_GATE = 1
-tower_block_level_1_pass = 1
-tower_block_level_6_gate_key = 1
 
 #Variables:
 #----------
@@ -74,8 +72,8 @@ def status():
             slow_text("3. Map (Enter 3) ")
             print()
             print()
-            #time.sleep(1)
-            slow_text("3. Current inventory (Enter 4) ")
+
+            slow_text("4. Current inventory (Enter 4) ")
             print()
             print()
 
@@ -94,10 +92,11 @@ def status():
                 loop_control = False
 
             elif display_updated_status == 3:
-                exit()
+                #map here
 
             elif display_updated_status == 4:
-                exit()
+                slow_text(f"Your inventory is {inventory}.")
+                space()
             else:
                 slow_text("You have to enter 1, 2, 3 or 4")
                 print()
@@ -268,7 +267,6 @@ def tower_block_search():
 #sub-functions for towerblock
 #----------------------------
 def find_map_choice_1():
-    print()
     slow_text("You walk over to the rubbish bin...")
     print()
     slow_text("but once you arrive there is a strange, rotten smell coming from it...")
@@ -291,6 +289,7 @@ def find_map_choice_1():
             player_cortisol =+20
             cortisol_check()
             space()
+
             slow_text("You go back to the bin, but find no map.")
             print()
             slow_text("It is your lucky day though as you found a lab note.")
@@ -313,10 +312,10 @@ def find_map_choice_1():
             print()
             slow_text("You have to enter 1 or 2")
             loop_control = True
+            #fix this
 def find_map_choice_2():
-    print()
+    slow_text("")
 def find_map_choice_3():
-    print()
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
 def slow_text(text: str, speed = 0.00003):
