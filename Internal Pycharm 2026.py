@@ -19,6 +19,9 @@ tower_block_level_6_gate_key = 1
 #Variables:
 #----------
 inventory = []
+searched_locations = []
+available_options = []
+all_options = []
 
 player_time = 5 #expel time = 12
 player_cortisol = 0
@@ -50,6 +53,11 @@ def sleep_3_and_space():
     print()
     print()
     time.sleep(3)
+
+def get_available_options(all_options, searched_locations):
+    global available_options
+    return [option for option in all_options if option not in searched_locations]
+
 
 def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
@@ -207,48 +215,60 @@ def tower_block():
     slow_text("you are inside a tech classroom, quickly search the class for a school map before you are found...")
     print()
     print()
-
+    tower_block_search()
+def tower_block_search():
     loop_control = True
+    all_options = [1,2,3]
     while loop_control:
         try:
-            slow_text("1. Search the rubbish bin (Enter 1)")
-            print()
-            print()
+            available_options = get_available_options(all_options, searched_locations)
+            options_text = ",".join(str(option) for option in available_options)
 
-            slow_text("2. Search the teacher's draws (Enter 2)")
-            print()
-            print()
+            if 1 not in searched_locations:
+                slow_text("1. Search the rubbish bin (Enter 1)")
+                print()
+                print()
 
-            slow_text("3. Search the electronics storage system (Enter 3) ")
-            print()
-            print()
+            if 2 not in searched_locations:
+                slow_text("2. Search the teacher's draws (Enter 2)")
+                print()
+                print()
+
+            if 3 not in searched_locations:
+                slow_text("3. Search the electronics storage system (Enter 3) ")
+                print()
+                print()
 
             find_map = int(input("Enter your choice on where you want to go: "))
 
-            if find_map == 1:
+            if find_map == 1 and 1 not in searched_locations:
+                searched_locations.append(1)
                 print()
                 print()
                 find_map_choice_1()
                 loop_control = False
 
-            elif find_map == 2:
+            elif find_map == 2 and 2 not in searched_locations:
+                searched_locations.append(2)
                 print()
                 print()
                 find_map_choice_2()
                 loop_control = False
 
-            elif find_map == 3:
+            elif find_map == 3 and 3 not in searched_locations:
+                searched_locations.append(3)
                 print()
                 print()
                 find_map_choice_3()
                 loop_control = False
+            elif len(searched_locations) == 3:
+                loop_control = False
 
             else:
-                slow_text("You have to enter 1, 2 or 3")
+                slow_text(f"You have to enter {available_options}")
                 print()
-
         except ValueError:
-            slow_text("Enter an integer, ever 1, 2 or 3")
+            slow_text(f"Enter an integer, ever {available_options}")
             print()
 
 #sub-functions for towerblock
@@ -280,10 +300,12 @@ def find_map_choice_1():
             space()
             slow_text("You go back to the bin, but find no map.")
             print()
-            slow_text("It is your lucky day though as you found ")
-
-
+            slow_text("It is your lucky day though as you found a lab note.")
+            inventory.append("lab note")
+            space()
             loop_control = False
+            tower_block_search()
+
 
         elif search_bin == 2:
             print()
@@ -309,7 +331,7 @@ def find_map_choice_3():
     print()
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.03):
+def slow_text(text: str, speed = 0.00003):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
