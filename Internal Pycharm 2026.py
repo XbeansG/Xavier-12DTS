@@ -12,7 +12,13 @@ loop = True
 
 #Constants:
 #----------
-KEY_ESCAPE_GATE = 1
+SCHOOL_MAP = {
+    "1":"Science Class",
+    "2":"School Gym",
+    "3":"Math Class",
+    #"4":"AGC" Create later
+
+}
 
 #Variables:
 #----------
@@ -52,8 +58,16 @@ def sleep_3_and_space():
     print()
     time.sleep(3)
 
-def map():
-    print("")
+def show_map():
+    slow_text("====School Map====")
+    print()
+    print()
+
+    for key, location in SCHOOL_MAP.items():
+        print(f"{key}: {location}")
+    space()
+
+
 
 def get_available_options(all_options, searched_locations):
     global available_options
@@ -110,7 +124,6 @@ def cortisol_check():
     if player_cortisol >= 100:
         slow_text(f"{name}, Your cortisol levels exceeded the limit and you pass out.")
         print()
-        #time.sleep(2)
         slow_text("You wake up in Mr Denham's office...")
         print()
         slow_text("I am not angry, I am just disappointed, you are expelled!!!")
@@ -375,7 +388,7 @@ def slow_text(text: str, speed = 0.03):
 
 #Main Loop:
 #----------
-#make map()!!!
+show_map()
 name_start()
 start_menu()
 tower_block()
