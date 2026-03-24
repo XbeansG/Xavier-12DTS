@@ -31,6 +31,7 @@ display_updated_status = ""
 find_map = ""
 start_menu_choice = ""
 search_bin = ""
+search_electronics = ""
 
 #Functions:
 #---------
@@ -92,7 +93,7 @@ def status():
                 loop_control = False
 
             elif display_updated_status == 3:
-                #map here
+                print() #map here
 
             elif display_updated_status == 4:
                 slow_text(f"Your inventory is {inventory}.")
@@ -112,7 +113,7 @@ def cortisol_check():
         #time.sleep(2)
         slow_text("You wake up in Mr Denham's office...")
         print()
-        slow_text("I am not angry, I am just dissapointed, you are expelled!!!")
+        slow_text("I am not angry, I am just disappointed, you are expelled!!!")
         exit()
     else:
         print()
@@ -232,7 +233,7 @@ def tower_block_search():
                 print()
                 print()
 
-            find_map = int(input("Enter your choice on where you want to go: "))
+            find_map = int(input("Enter your choice on where you want to search for the school map: "))
 
             if find_map == 1 and 1 not in searched_locations:
                 searched_locations.append(1)
@@ -314,11 +315,60 @@ def find_map_choice_1():
             loop_control = True
             #fix this
 def find_map_choice_2():
-    slow_text("")
+    slow_text("You walk over to the teacher's draws...")
+    print()
+    slow_text("The draws for some reason is unlocked so you pull it out.")
+    print()
+    slow_text("After searching for a good few seconds a piece of paper catches your attention...")
+    print()
+    slow_text("You unravel the paper to find that it is in fact the school map!!!")
+    space()
+
 def find_map_choice_3():
+    slow_text("You walk over to the electronics storage system...")
+    print()
+    slow_text("It is overflowing with random electronic parts...")
+    print()
+    loop_control = True
+    while loop_control == True:
+        search_electronics = int(input("Enter (1) if you still want to search the electronics storage system, or enter (2) if you want to search somewhere else: "))
+        if search_electronics == 1:
+            print()
+            print()
+            slow_text("You start move electronics round in hope for the school map...")
+            print()
+            slow_text("You keep searching with a dribble of hope left..")
+            print()
+            slow_text("Your hope is destroyed after searching the whole storage system.")
+            slow_text("You leave the area in hopes to find the map somewhere else feeling pitiful.")
+            print()
+            print()
+            global player_time
+            player_time = +1
+            #make player time function
+            space()
+            loop_control = False
+            space()
+            tower_block_search()
+
+        elif search_bin == 2:
+            print()
+            print()
+            slow_text(f"You will see if that move pays off {name}...")
+            loop_control = False
+            space()
+            tower_block_search()
+
+        else:
+            print()
+            print()
+            slow_text("You have to enter 1 or 2")
+            loop_control = True
+
+
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.00003):
+def slow_text(text: str, speed = 0.03):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
