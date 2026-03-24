@@ -107,7 +107,10 @@ def status():
                 loop_control = False
 
             elif display_updated_status == 3:
-                print() #map here
+                show_map()
+                print()
+                print()
+                loop_control = False
 
             elif display_updated_status == 4:
                 slow_text(f"Your inventory is {inventory}.")
@@ -131,7 +134,27 @@ def cortisol_check():
     else:
         print()
         slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
+        space()
+
+def time_check():
+    print()
+    if player_time >= 12:
+        slow_text("Tick, tock")
         print()
+        time.sleep(3)
+        slow_text("tick tock.")
+        print()
+        time.sleep(1)
+        slow_text(f"{name}, it is too late to escape...")
+        print()
+        time.sleep(3)
+        slow_text("Mr Denham storms out of his office and expels you!!!")
+        exit()
+    else:
+        print()
+        slow_text(f"The current time is {player_time}PM, spend your time wisely as midnight is near...")
+        space()
+
 
 #Start/introduction functions
 def name_start():
@@ -300,7 +323,7 @@ def find_map_choice_1():
             print()
             print()
             global player_cortisol
-            player_cortisol =+20
+            player_cortisol +=20
             cortisol_check()
             space()
 
@@ -357,14 +380,14 @@ def find_map_choice_3():
             print()
             print()
             global player_time
-            player_time = +1
+            player_time +=1
             #make player time function
-            space()
+            time_check()
             loop_control = False
             space()
             tower_block_search()
 
-        elif search_bin == 2:
+        elif search_electronics == 2:
             print()
             print()
             slow_text(f"You will see if that move pays off {name}...")
@@ -381,16 +404,16 @@ def find_map_choice_3():
 
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.03):
+def slow_text(text: str, speed = 0.00003):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
 
 #Main Loop:
 #----------
-show_map()
 name_start()
 start_menu()
 tower_block()
-status()
+show_map()
+#intro status()
 
