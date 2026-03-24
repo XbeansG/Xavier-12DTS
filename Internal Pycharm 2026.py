@@ -166,7 +166,7 @@ def name_start():
     slow_text("Before you play the best game of your life I need to know 1 thing from you...")
     print()
     #time.sleep(1)
-    name = input("what is your name: ")
+    name = input(slow_text("what is your name: "))
     #time.sleep(1)
     print()
     #time.sleep(1)
@@ -404,7 +404,7 @@ def find_map_choice_3():
 
 
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.00003):
+def slow_text(text: str, speed = 0.04):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
