@@ -205,9 +205,7 @@ def time_check():
 #Start/introduction functions
 def name_start():
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
-    print()
-    print()
-    #time.sleep(1)
+    space()
 
     slow_text("Before you play the best game of your life I need to know 1 thing from you...")
     print()
@@ -271,7 +269,7 @@ def introduction():
     print()
     slow_text("Be careful as every move costs you time and can increase your cortisol...")
     print()
-    slow_text("Solve riddles and avoid danger, collect all 3 key fragments to forge the holy key,")
+    slow_text("Solve riddles and avoid danger, collect all 3 key fragments (Rusty key fragment, Heavy weighted key fragment, Paper key fragment) to forge the holy key,")
     print()
     slow_text("so you can unlock the school gate before it clocks midnight...")
     print()
@@ -453,6 +451,48 @@ def find_map_choice_3():
 def science_class():
     space()
     slow_text("With the help of your map, you navigate your way through the school into the science block.")
+    print()
+    slow_text("You walk through the corridor, the atmosphere is eerie...")
+    print()
+    slow_text("Out of no where a teacher starts yelling at you!!!")
+    slow_text(f"{name}, what are you still doing here?!?!")
+    print()
+    global player_cortisol
+    player_cortisol += 20
+    cortisol_check()
+    space()
+
+    slow_text("You dash into the nearest class and luckily escape danger.")
+    slow_text("You murmur to yourself,")
+    print()
+    slow_text("'Hold on a minute I need a rusty key fragment, I could maybe find it in this science lab...' ")
+    print()
+    slow_text("You see a chest in the corner of the room so you make your way over..")
+    space()
+    slow_text("'What brings you hear?', the chest asks.")
+    print()
+    slow_text("'W-w-well I am looking for a rusty key fragment.'")
+    print()
+    slow_text("The chest replies 'Very well then, I have access to this key, but I am bored so you have to solve a riddle...'.")
+    print()
+    slow_text("'Every mistake costs you time...'")
+    space()
+
+    if "lab_note" in inventory:
+        print()
+        slow_text("You unravel the note from your pocket, the reading follows: ")
+        space()
+        slow_text("The objective is simple solve 1 of the riddles to receive the key...")
+        print()
+        slow_text("The chest only knows 3 jokes so it will keep repeating them until you answer correctly.")
+        print()
+        slow_text("The first letter of the answer to question 1 starts with j.")
+        print()
+        slow_text("The first letter of the answer to question 2 starts with k.")
+        print()
+        slow_text("The first letter of the answer to question 3 starts with c.")
+
+
 
 
 #School gym
@@ -467,9 +507,7 @@ def math_class():
 #----------
 name_start()
 start_menu()
-class_laptop()
 tower_block()
 show_map()
 #intro status()
-class_laptop()
 
