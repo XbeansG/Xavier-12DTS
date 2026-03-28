@@ -15,7 +15,7 @@ loop = True
 SCHOOL_MAP = {
     "1":"Science Class",
     "2":"School Gym",
-    "3":"Math Class",
+    "3":"Math Class"
     #"4":"AGC" Create later
 
 }
@@ -38,12 +38,19 @@ find_map = ""
 start_menu_choice = ""
 search_bin = ""
 search_electronics = ""
+map_teleport = ""
 
 #Functions:
 #---------
 
 #Set up section of code
 #-----------------------------
+#function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
+def slow_text(text: str, speed = 0.0000004):
+    for letter in text:
+        print(letter, end = '')
+        time.sleep(speed)
+
 def space():
     print()
     print()
@@ -59,14 +66,53 @@ def sleep_3_and_space():
     time.sleep(3)
 
 def show_map():
-    slow_text("====School Map====")
-    print()
-    print()
+    while True:
+            slow_text("====School Map====")
+            print()
+            print()
 
-    for key, location in SCHOOL_MAP.items():
-        print(f"{key}: {location}")
+            for key, location in SCHOOL_MAP.items():
+                print(f"{key}: {location}")
+            space()
+
+            map_teleport = input(f"{name}, where do you want to travel: ")
+
+            if map_teleport == "1":
+                science_class()
+                break
+
+            elif map_teleport == "2":
+                school_gym()
+                break
+
+            elif map_teleport == "3":
+                math_class()
+                break
+
+            else:
+                slow_text("You have to enter 1, 2 or 3.")
+                print()
+
+
+def class_laptop():
     space()
-
+    slow_text("-----------------------")
+    print()
+    slow_text("-----------------------")
+    print()
+    slow_text("-----------------------")
+    print()
+    slow_text("-----------------------")
+    print()
+    slow_text("-----------------------")
+    print()
+    slow_text(f"Welcome {name}.")
+    space()
+    slow_text("After successfully logging into the laptop,")
+    print()
+    slow_text("you go into the Wellington College student portal to find your status...")
+    print()
+    status()
 
 
 def get_available_options(all_options, searched_locations):
@@ -166,7 +212,7 @@ def name_start():
     slow_text("Before you play the best game of your life I need to know 1 thing from you...")
     print()
     #time.sleep(1)
-    name = input(slow_text("what is your name: "))
+    name = input("what is your name: ")
     #time.sleep(1)
     print()
     #time.sleep(1)
@@ -225,7 +271,9 @@ def introduction():
     print()
     slow_text("Be careful as every move costs you time and can increase your cortisol...")
     print()
-    slow_text("Solve riddles and avoid danger to find the almighty key so you can unlock the school gate before it clocks midnight...")
+    slow_text("Solve riddles and avoid danger, collect all 3 key fragments to forge the holy key,")
+    print()
+    slow_text("so you can unlock the school gate before it clocks midnight...")
     print()
     #time.sleep(1)
     print(f"Good luck {name}.")
@@ -401,19 +449,27 @@ def find_map_choice_3():
             slow_text("You have to enter 1 or 2")
             loop_control = True
 
+#Science class
+def science_class():
+    space()
+    slow_text("With the help of your map, you navigate your way through the school into the science block.")
 
 
-#function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.04):
-    for letter in text:
-        print(letter, end = '')
-        time.sleep(speed)
+#School gym
+def school_gym():
+    space()
+
+#Math class
+def math_class():
+    space()
 
 #Main Loop:
 #----------
 name_start()
 start_menu()
+class_laptop()
 tower_block()
 show_map()
 #intro status()
+class_laptop()
 
