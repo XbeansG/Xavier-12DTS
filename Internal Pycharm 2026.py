@@ -20,6 +20,14 @@ SCHOOL_MAP = {
 
 }
 
+riddles = [
+    {"question": "I can be cracked, made, told, and played. What am I?",
+     "answer": "joke"},
+    {"question": "What has many keys but can not open any doors. What am I?",
+     "answer": "piano"},
+    {"question": "What has hands but can not clap?",
+     "answer": "clock"}]
+
 #Variables:
 #----------
 inventory = []
@@ -46,7 +54,7 @@ map_teleport = ""
 #Set up section of code
 #-----------------------------
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.0000004):
+def slow_text(text: str, speed = 0.000004):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
@@ -449,6 +457,9 @@ def find_map_choice_3():
 
 #Science class
 def science_class():
+    global player_time
+    global player_cortisol
+
     space()
     slow_text("With the help of your map, you navigate your way through the school into the science block.")
     print()
@@ -457,7 +468,6 @@ def science_class():
     slow_text("Out of no where a teacher starts yelling at you!!!")
     slow_text(f"{name}, what are you still doing here?!?!")
     print()
-    global player_cortisol
     player_cortisol += 20
     cortisol_check()
     space()
@@ -491,6 +501,32 @@ def science_class():
         slow_text("The first letter of the answer to question 2 starts with k.")
         print()
         slow_text("The first letter of the answer to question 3 starts with c.")
+
+    random.shuffle(riddles)
+
+    #loop until the player gets 1 right
+    correct = False
+    while not correct:
+        riddle = random.choice(riddles)
+        print("Riddle: ", riddle["question"])
+        print()
+        player_answer = input("Enter your answer: ").lower()
+
+        if player_answer == riddle["answer"]:
+            print("Correct!!!")
+            print()
+            print(f"Very well then {name}, here is the rusty key fragment.")
+            inventory.append("rusty_key_fragment")
+            correct = True
+        else:
+            print("Wrong answer!!!")
+            print()
+            print("Time is ticking!!!")
+            player_time +=1
+            time_check()
+
+
+
 
 
 
