@@ -594,7 +594,7 @@ def math_class():
     print()
     slow_text("'You will keep repeating worksheets until you complete the objective.'")
     print()
-
+    #calc
     correct_math_streak = 0
     while correct_math_streak < 3:
         #create math question and answer for it
