@@ -28,6 +28,8 @@ riddles = [
     {"question": "What has hands but can not clap?",
      "answer": "clock"}]
 
+actions = ["jump", "crouch", "dash left", "dash right"]
+
 #Variables:
 #----------
 inventory = []
@@ -39,6 +41,8 @@ player_time = 5 #expel time = 12
 player_cortisol = 0
 player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
 correct_math_streak = 0
+
+
 name = ""
 display_updated_status = ""
 
@@ -55,7 +59,7 @@ map_teleport = ""
 #Set up section of code
 #-----------------------------
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.000004):
+def slow_text(text: str, speed = 0.04):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
@@ -546,6 +550,7 @@ def science_class():
 #School gym
 def school_gym():
     global player_cortisol
+    dodge_streak = 0
 
     space()
     slow_text("Using your school map, you walk over to the school gym to hopefully find a key fragment...")
@@ -564,16 +569,40 @@ def school_gym():
     if "protein_powder" in inventory:
         slow_text("You chug the protein shake from earlier to improve your physical ability.")
         reaction_time = 5
-        required_streak = 2
+        required_dodge_streak = 2
     else:
         reaction_time = 3
-        required_streak = 3
+        required_dodge_streak = 3
     print()
-    slow_text(f"You have to dodge {required_streak} attacks from the powerlifter to get past.")
+    slow_text(f"You have to dodge {required_dodge_streak} attacks from the powerlifter to get past.")
     print()
 
+    while dodge_streak < required_dodge_streak:
+        action = random.choice(actions)
+        slow_text(f"Quick! Enter '{action}' within {reaction_time} to dodge!!!")
 
-    inventory.append("paper_key_fragment")
+        start_time = time.time()
+        player_input = input(">>>").lower()
+        end_time = time.time()
+
+        if player_input == action and end_time - start_time <= reaction_time:
+            dodge_streak += 1
+            slow_text(f"Good job, you dodged in time! ({dodge_streak}/{required_dodge_streak})")
+            print()
+        else:
+            slow_text("The power lifter successfully attacks!!!")
+            print()
+            player_cortisol +=10
+            cortisol_check()
+            dodge_streak = 0
+    slow_text("The powerlifter clearly did not do enough cardio, so you slip right past him.")
+    print()
+    slow_text("You enter the gym and the weighted key fragment is right there on the dumbel rack.")
+    print()
+    inventory.append("weighted_key_fragment")
+
+
+
 #Math class
 def math_class():
     global player_cortisol
@@ -636,7 +665,6 @@ def main_loop():
     name_start()
     start_menu()
     tower_block()
-    show_map()
     #intro status()
 
 #running game
