@@ -415,9 +415,9 @@ def find_map_choice_2():
     print()
     slow_text("You unravel the paper to find that it is in fact the school map!!!")
     print()
-    slow_text("Your luck does not run out when searching as you discover a helpful validated injury pass for the gym.")
+    slow_text("Your luck does not run out when searching as you discover a protein shake for the gym.")
     space()
-    inventory.append("injury pass")
+    inventory.append("protein shake")
     space()
 
 def find_map_choice_3():
@@ -545,7 +545,35 @@ def science_class():
 
 #School gym
 def school_gym():
+    global player_cortisol
+
     space()
+    slow_text("Using your school map, you walk over to the school gym to hopefully find a key fragment...")
+    print()
+    slow_text("As you attempt to enter the gym a powerlifter interrupts you suddenly at the door way.")
+    print()
+    slow_text("He demands 'Hey, how much do you bench?!?'")
+    print()
+    slow_text("You reply 'No clue.'")
+    print()
+    slow_text("He yells 'Get out of here then!!!'")
+    print()
+    slow_text("You think to yourself 'a key fragment must be in here, I must get past him'.")
+    space()
+
+    if "protein_powder" in inventory:
+        slow_text("You chug the protein shake from earlier to improve your physical ability.")
+        reaction_time = 5
+        required_streak = 2
+    else:
+        reaction_time = 3
+        required_streak = 3
+    print()
+    slow_text(f"You have to dodge {required_streak} attacks from the powerlifter to get past.")
+    print()
+
+
+    inventory.append("paper_key_fragment")
 #Math class
 def math_class():
     global player_cortisol
@@ -602,12 +630,15 @@ def math_class():
 
 
 
-
 #Main Loop:
 #----------
-name_start()
-start_menu()
-tower_block()
-show_map()
-#intro status()
+def main_loop():
+    name_start()
+    start_menu()
+    tower_block()
+    show_map()
+    #intro status()
+
+#running game
+main_loop()
 
