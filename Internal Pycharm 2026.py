@@ -570,26 +570,27 @@ def math_class():
     correct_math_streak = 0
     while correct_math_streak < 3:
         #create math question and answer for it
-        number_1 = random.randint(1, 20)
-        number_2 = random.randint(1, 20)
+        number_1 = random.randint(1, 12)
+        number_2 = random.randint(1, 12)
         correct_math_answer = number_1 * number_2
 
         try:
             player_answer = int(input(f"What is the answer for {number_1} x {number_2}: "))
+
+        except ValueError:
+            slow_text("You did not enter a number!!!")
+            continue
+
         if player_answer == correct_math_answer:
             print()
             correct_math_streak += 1
-            slow_text(f"Correct!!! ({correct_math_answer}/ out of 3 in a row.)")
+            slow_text(f"Correct!!! ({correct_math_streak}/3 in a row.)")
             space()
         else:
             slow_text("Incorrect!!! your streak plummets down to 0!!!")
             correct_math_streak = 0
             player_cortisol += 10
             cortisol_check()
-
-        except ValueError:
-            slow_text("You did not enter a number!!!")
-        continue
 
     space()
     slow_text("Very well then,")
