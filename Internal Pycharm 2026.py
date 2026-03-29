@@ -665,7 +665,7 @@ def main_loop():
     name_start()
     start_menu()
     tower_block()
-    #intro status()
+    #make an intro status()
 
 #running game
 main_loop()
