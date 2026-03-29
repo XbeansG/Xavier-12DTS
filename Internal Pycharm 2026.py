@@ -38,6 +38,7 @@ all_options = []
 player_time = 5 #expel time = 12
 player_cortisol = 0
 player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
+correct_math_streak = 0
 name = ""
 display_updated_status = ""
 
@@ -358,25 +359,26 @@ def tower_block_search():
 #sub-functions for towerblock
 #----------------------------
 def find_map_choice_1():
+    global player_cortisol
+
     slow_text("You walk over to the rubbish bin...")
     print()
     slow_text("but once you arrive there is a strange, rotten smell coming from it...")
     print()
     print()
     loop_control = True
-    while loop_control == True:
+    while loop_control:
         search_bin = int(input("Enter (1) if you still want to search bin, or enter (2) if you want to search somewhere else: "))
         if search_bin == 1:
             print()
             print()
             slow_text("You start removing trash from the rubbish bin...")
             print()
-            slow_text("Out of no where a rat jumps out of the bin and trys to attack you!!!")
+            slow_text("Out of no where a rat jumps out of the bin and tries to attack you!!!")
             print()
             slow_text("You dodge just in time but your cortisol spikes!!!")
             print()
             print()
-            global player_cortisol
             player_cortisol +=20
             cortisol_check()
             space()
@@ -412,28 +414,38 @@ def find_map_choice_2():
     slow_text("After searching for a good few seconds a piece of paper catches your attention...")
     print()
     slow_text("You unravel the paper to find that it is in fact the school map!!!")
+    print()
+    slow_text("Your luck does not run out when searching as you discover a helpful validated injury pass for the gym.")
+    space()
+    inventory.append("injury pass")
     space()
 
 def find_map_choice_3():
+    global player_time
     slow_text("You walk over to the electronics storage system...")
     print()
     slow_text("It is overflowing with random electronic parts...")
     print()
     loop_control = True
-    while loop_control == True:
+    while loop_control:
         search_electronics = int(input("Enter (1) if you still want to search the electronics storage system, or enter (2) if you want to search somewhere else: "))
         if search_electronics == 1:
             print()
             print()
             slow_text("You start move electronics round in hope for the school map...")
             print()
-            slow_text("You keep searching with a dribble of hope left..")
+            print()
+            slow_text("You instead find a calculator.")
+            inventory.append("calculator")
+            space()
+
+            slow_text("You keep searching for the map, with a dribble of hope left..")
             print()
             slow_text("Your hope is destroyed after searching the whole storage system.")
+            print()
             slow_text("You leave the area in hopes to find the map somewhere else feeling pitiful.")
             print()
             print()
-            global player_time
             player_time +=1
             #make player time function
             time_check()
@@ -455,10 +467,12 @@ def find_map_choice_3():
             slow_text("You have to enter 1 or 2")
             loop_control = True
 
+#Locations:
+
 #Science class
 def science_class():
-    global player_time
     global player_cortisol
+    global player_time
 
     space()
     slow_text("With the help of your map, you navigate your way through the school into the science block.")
@@ -494,13 +508,14 @@ def science_class():
         space()
         slow_text("The objective is simple solve 1 of the riddles to receive the key...")
         print()
-        slow_text("The chest only knows 3 jokes so it will keep repeating them until you answer correctly.")
+        slow_text("The chest was taught only knows 3 jokes so it will keep repeating them until you answer 1 of them correctly.")
         print()
-        slow_text("The first letter of the answer to question 1 starts with j.")
+        slow_text("Question: I can be cracked, made, told, and played.First letter will be j.")
         print()
-        slow_text("The first letter of the answer to question 2 starts with k.")
+        slow_text("Question:What has many keys but can not open any doors. First letter will be p.")
         print()
-        slow_text("The first letter of the answer to question 3 starts with c.")
+        slow_text("Question: What has hands but can not clap? First letter will be c.")
+        space()
 
     random.shuffle(riddles)
 
@@ -525,19 +540,67 @@ def science_class():
             player_time +=1
             time_check()
 
-
-
-
-
+        random.shuffle(riddles)
 
 
 #School gym
 def school_gym():
     space()
-
 #Math class
 def math_class():
+    global player_cortisol
+
     space()
+    slow_text("With the help of your trusty map, you walk over to the math department...")
+    print()
+    slow_text("The head of the math department walks out of his class and spots you lurking")
+    print()
+    slow_text(f"{name}, look I have had a long day, if you get these math questions right you will not have a detention.")
+    space()
+
+    slow_text("You walk into the class and see other kids sitting around as they all have a detention")
+    print()
+    slow_text("You sit down whilst the kids stare at you...")
+    print()
+    slow_text("'Here is your work sheet, it is simple get 3 in a row right and you can walk out of here.'")
+    print()
+    slow_text("'You will keep repeating worksheets until you complete the objective.'")
+    print()
+
+    correct_math_streak = 0
+    while correct_math_streak < 3:
+        #create math question and answer for it
+        number_1 = random.randint(1, 20)
+        number_2 = random.randint(1, 20)
+        correct_math_answer = number_1 * number_2
+
+        try:
+            player_answer = int(input(f"What is the answer for {number_1} x {number_2}: "))
+        if player_answer == correct_math_answer:
+            print()
+            correct_math_streak += 1
+            slow_text(f"Correct!!! ({correct_math_answer}/ out of 3 in a row.)")
+            space()
+        else:
+            slow_text("Incorrect!!! your streak plummets down to 0!!!")
+            correct_math_streak = 0
+            player_cortisol += 10
+            cortisol_check()
+
+        except ValueError:
+            slow_text("You did not enter a number!!!")
+        continue
+
+    space()
+    slow_text("Very well then,")
+    print()
+    slow_text("'here is the paper key that you will need for leaving.'")
+
+    inventory.append("paper_key_fragment")
+
+
+
+
 
 #Main Loop:
 #----------
