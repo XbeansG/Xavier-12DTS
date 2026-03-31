@@ -32,6 +32,7 @@ actions = ["jump", "crouch", "dash left", "dash right"]
 
 #Variables:
 #----------
+discovered_locations = {"1","2","3"} #variable as 4th location is added later on
 inventory = []
 searched_locations = []
 available_options = []
@@ -85,21 +86,36 @@ def show_map():
             print()
 
             for key, location in SCHOOL_MAP.items():
-                print(f"{key}: {location}")
+                if key in discovered_locations:
+                    print(f"{key}: {location}")
             space()
 
             map_teleport = input(f"{name}, where do you want to travel: ")
 
+            if map_teleport not in discovered_locations:
+                print()
+                slow_text("That is not a discovered location")
+                print()
+                continue
+
             if map_teleport == "1":
+                discovered_locations.remove("1")
                 science_class()
                 break
 
             elif map_teleport == "2":
+                discovered_locations.remove("2")
                 school_gym()
                 break
 
             elif map_teleport == "3":
+                discovered_locations.remove("3")
                 math_class()
+                break
+
+            elif map_teleport == "4":
+                discovered_locations.remove("4")
+                AGC()
                 break
 
             else:
@@ -143,11 +159,7 @@ def status():
             print()
             print()
 
-            slow_text("3. Map (Enter 3) ")
-            print()
-            print()
-
-            slow_text("4. Current inventory (Enter 4) ")
+            slow_text("4. Current inventory (Enter 3) ")
             print()
             print()
 
@@ -166,20 +178,16 @@ def status():
                 loop_control = False
 
             elif display_updated_status == 3:
-                show_map()
-                print()
-                print()
-                loop_control = False
-
-            elif display_updated_status == 4:
                 slow_text(f"Your inventory is {inventory}.")
                 space()
+                loop_control = False
+
             else:
-                slow_text("You have to enter 1, 2, 3 or 4")
+                slow_text("You have to enter 1, 2 or 3.")
                 print()
 
         except ValueError:
-            slow_text("Enter an integer, ever 1, 2, 3 or 4")
+            slow_text("Enter an integer, ever 1, 2 or 3.")
             print()
 def cortisol_check():
     print()
@@ -424,6 +432,7 @@ def find_map_choice_2():
     print()
     slow_text("You unravel the paper to find that it is in fact the school map!!!")
     print()
+    show_map()
 
 def find_map_choice_3():
     global player_time
@@ -545,7 +554,10 @@ def science_class():
             player_time +=1
             time_check()
 
-        random.shuffle(riddles)
+    space()
+    slow_text("You walk over to a laptop...")
+    print()
+    class_laptop()
 
 
 #School gym
@@ -658,6 +670,10 @@ def math_class():
     inventory.append("paper_key_fragment")
 
 
+#final location
+def AGC():
+    space()
+    slow_text("With")
 
 
 #Main Loop:
