@@ -59,7 +59,7 @@ map_teleport = ""
 #Set up section of code
 #-----------------------------
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.04):
+def slow_text(text: str, speed = 0.00004):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
@@ -391,6 +391,11 @@ def find_map_choice_1():
             print()
             slow_text("It is your lucky day though as you found a lab note.")
             inventory.append("lab note")
+            print()
+            slow_text("Your luck does not run out when searching as you discover a protein shake for the gym.")
+            space()
+            inventory.append("protein shake")
+            space()
             loop_control = False
             space()
             tower_block_search()
@@ -419,10 +424,6 @@ def find_map_choice_2():
     print()
     slow_text("You unravel the paper to find that it is in fact the school map!!!")
     print()
-    slow_text("Your luck does not run out when searching as you discover a protein shake for the gym.")
-    space()
-    inventory.append("protein shake")
-    space()
 
 def find_map_choice_3():
     global player_time
@@ -451,7 +452,6 @@ def find_map_choice_3():
             print()
             print()
             player_time +=1
-            #make player time function
             time_check()
             loop_control = False
             space()
@@ -491,6 +491,7 @@ def science_class():
     space()
 
     slow_text("You dash into the nearest class and luckily escape danger.")
+    print()
     slow_text("You murmur to yourself,")
     print()
     slow_text("'Hold on a minute I need a rusty key fragment, I could maybe find it in this science lab...' ")
