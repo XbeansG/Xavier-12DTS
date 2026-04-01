@@ -10,6 +10,8 @@ import random
 
 #Constants:
 #----------
+
+#possible locations player can travel depending on what is unlocked
 SCHOOL_MAP = {
     "1":"Science Class",
     "2":"School Gym",
@@ -18,6 +20,7 @@ SCHOOL_MAP = {
 
 }
 
+#all the possible riddles that the player can be asked for the science location
 riddles = [
     {"question": "I can be cracked, made, told, and played. What am I?",
      "answer": "joke"},
@@ -26,8 +29,10 @@ riddles = [
     {"question": "What has hands but can not clap?",
      "answer": "clock"}]
 
+#all the possible moves for dodging for the gym function
 actions = ["jump", "crouch", "dash left", "dash right"]
 
+#all fragments required for the holy gate key
 required_fragments = {"rusty_key_fragment", "weighted_key_fragment", "paper_key_fragment"}
 
 #Variables:
@@ -52,6 +57,7 @@ def slow_text(text: str, speed = 0.00004):
         print(letter, end = '', flush = True)
         time.sleep(speed)
 
+#resets values to starting values
 def reset_game():
     global inventory, player_cortisol, player_time, discovered_locations, searched_locations
     inventory = []
@@ -60,17 +66,19 @@ def reset_game():
     discovered_locations = {"1","2","3"}
     searched_locations = []
 
+#checks if player has all key fragments, if so then location 4 unlocks
 def key_fragment_check():
     if all (item in inventory for item in required_fragments):
         discovered_locations.add("4")
 
+#easy way to print out lots of space
 def space():
     print()
     print()
     print()
 
 
-
+#shows the current available options the player can travel to
 def show_map():
     key_fragment_check()
     while True:
@@ -116,7 +124,7 @@ def show_map():
             slow_text("You have to enter 1, 2 or 3.")
             print()
 
-
+#shows the current status with cool dialogue
 def class_laptop():
     global name
     space()
@@ -139,10 +147,11 @@ def class_laptop():
     status()
     space()
 
-
+#gets all the options that player can visit
 def get_available_options(all_options, searched_locations):
     return [option for option in all_options if option not in searched_locations]
 
+#function for player to check there status
 def status():
     loop_control = True
     while loop_control:
@@ -186,6 +195,7 @@ def status():
             slow_text("Enter an integer, ever 1, 2 or 3.")
             print()
 
+#check if they have reached 100 cortisol and lost the game, if below 100 they are told there current cortisol level
 def cortisol_check():
     global name
 
@@ -202,6 +212,7 @@ def cortisol_check():
         slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
         space()
 
+#shows the current time for player or ends game if player's time reaches 12
 def time_check():
     print()
     if player_time >= 12:
@@ -223,6 +234,8 @@ def time_check():
 
 
 #Start/introduction functions
+
+#fetches name
 def name_start():
     global name
 
@@ -237,23 +250,20 @@ def name_start():
     print()
     print()
 
+#gives player 3 options, ever starting straight away, getting an introduction then starting or just quit
 def start_menu():
     loop_control = True
 
     while loop_control:
         try:
             slow_text("1. Start (Enter 1)")
-            print()
-            print()
+            space()
 
             slow_text("2. Introduction (Enter 2)")
-            print()
-            print()
+            space()
 
             slow_text("3. Quit (Enter 3) ")
-            print()
-            print()
-            #time.sleep(1)
+            space()
 
             start_menu_choice = int(input("Enter your choice: "))
 
@@ -275,6 +285,7 @@ def start_menu():
             slow_text("Enter an integer, ever 1, 2 or 3")
             print()
 
+#breifs the player on the objective and situation player is in
 def introduction():
     global name
     slow_text("First of all you will need to understand the situation you are placed in...")
@@ -287,14 +298,12 @@ def introduction():
     print()
     slow_text("Be careful as every move costs you time and can increase your cortisol...")
     print()
-    slow_text("Solve riddles and avoid danger, collect all 3 key fragments (Rusty key fragment, Heavy weighted key fragment, Paper key fragment) to forge the holy key,")
+    slow_text("Solve riddles and avoid danger, collect all 3 key fragments (Rusty key fragment, Heavy weighted key fragment, Paper key fragment) to forge the holy gate key,")
     print()
     slow_text("so you can unlock the school gate before it clocks midnight...")
     print()
     print(f"Good luck {name}.")
-    print()
-    print()
-    print()
+    space()
 
 
 #levels
@@ -361,7 +370,7 @@ def tower_block_search():
             find_map_choice_3()
 
 
-#sub-functions for towerblock
+#sub-functions for towerblock with all 3 options where they can search for the map
 #----------------------------
 def find_map_choice_1():
     global player_cortisol, name
@@ -518,6 +527,7 @@ def science_class():
     slow_text("'Every mistake costs you time...'")
     space()
 
+    #lab note is a hint for jokes found in the towerblock
     if "lab_note" in inventory:
         print()
         slow_text("You unravel the note from your pocket, the reading follows: ")
@@ -586,6 +596,7 @@ def school_gym():
     slow_text("You think to yourself 'a key fragment must be in here, I must get past him'.")
     space()
 
+    #makes challenge easier, item can be found in the towerblock
     if "protein_shake" in inventory:
         slow_text("You chug the protein shake from earlier to improve your physical ability.")
         reaction_time = 7
@@ -707,7 +718,7 @@ def AGC():
     print()
     slow_text(f"You step foot outside of the school, you are now free {name}")
     space()
-    exit()
+
 
 
 #Main Loop:
