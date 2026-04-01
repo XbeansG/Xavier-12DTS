@@ -748,7 +748,7 @@ def main_loop():
     result = tower_block_search()
     return result
 
-#running game
+#re-running game
 while True:
     reset_game()
     game_over = main_loop()
