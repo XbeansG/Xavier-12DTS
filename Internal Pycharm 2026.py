@@ -171,7 +171,8 @@ def status():
             display_updated_status = int(input("Enter your choice: "))
 
             if display_updated_status == 1:
-                cortisol_check()
+                if cortisol_check():
+                    return True
                 print()
                 print()
                 loop_control = False
@@ -206,11 +207,13 @@ def cortisol_check():
         slow_text("You wake up in Mr Denham's office...")
         print()
         slow_text("I am not angry, I am just disappointed, you are expelled!!!")
-        exit()
+        return True
+
     else:
         print()
         slow_text(f"You now have a cortisol level of {player_cortisol}, be careful, do not get to a level of 100 cortisol...")
         space()
+        return False
 
 #shows the current time for player or ends game if player's time reaches 12
 def time_check():
@@ -226,11 +229,13 @@ def time_check():
         print()
         time.sleep(3)
         slow_text("Mr Denham storms out of his office and expels you!!!")
-        exit()
+        return True
+
     else:
         print()
         slow_text(f"The current time is {player_time}PM, spend your time wisely as midnight is near...")
         space()
+        return False
 
 
 #Start/introduction functions
@@ -276,7 +281,8 @@ def start_menu():
                 loop_control = False
 
             elif start_menu_choice == 3:
-                exit()
+                return
+
             else:
                 slow_text("You have to enter 1, 2 or 3")
                 print()
@@ -398,7 +404,8 @@ def find_map_choice_1():
             print()
             print()
             player_cortisol +=20
-            cortisol_check()
+            if cortisol_check():
+                return True
             space()
 
             slow_text("You go back to the bin, but find no map.")
@@ -469,7 +476,8 @@ def find_map_choice_3():
             print()
             print()
             player_time +=1
-            time_check()
+            if time_check():
+                return True
             loop_control = False
             space()
             tower_block_search()
@@ -503,7 +511,8 @@ def science_class():
     slow_text(f"{name}, what are you still doing here?!?!")
     print()
     player_cortisol += 20
-    cortisol_check()
+    if cortisol_check():
+        return True
     space()
 
     slow_text("You dash into the nearest class and luckily escape danger.")
@@ -563,8 +572,8 @@ def science_class():
             print()
             print("Time is ticking!!!")
             player_time +=1
-            time_check()
-
+            if time_check():
+                return True
     space()
     slow_text("You walk over to a laptop...")
     print()
@@ -622,7 +631,8 @@ def school_gym():
             slow_text("The power lifter successfully attacks!!!")
             print()
             player_cortisol +=10
-            cortisol_check()
+            if cortisol_check():
+                return True
             dodge_streak = 0
 
     slow_text("The powerlifter clearly did not do enough cardio, so you slip right past him.")
@@ -681,7 +691,8 @@ def math_class():
             slow_text("Incorrect!!! your streak plummets down to 0!!!")
             correct_math_streak = 0
             player_cortisol += 10
-            cortisol_check()
+            if cortisol_check():
+                return True
 
     space()
     slow_text("Very well then,")
@@ -724,14 +735,18 @@ def AGC():
 def main_loop():
     name_start()
     start_menu()
-    tower_block_search()
+    result = tower_block_search()
+    return result
 
 #running game
 while True:
-    print("===GAME OVER===")
-    space()
     reset_game()
-    main_loop()
+    game_over = main_loop()
+    if game_over:
+        print("===GAME OVER===")
+        space()
+
+
     restart = input("Do you want to restart? (enter y or n): ").lower()
     if restart != "y":
         break
