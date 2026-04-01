@@ -81,49 +81,51 @@ def sleep_3_and_space():
 
 def show_map():
     while True:
-            slow_text("====School Map====")
+        global name
+        slow_text("====School Map====")
+        print()
+        print()
+
+        for key, location in SCHOOL_MAP.items():
+            if key in discovered_locations:
+                print(f"{key}: {location}")
+        space()
+
+        map_teleport = input(f"{name}, where do you want to travel: ")
+
+        if map_teleport not in discovered_locations:
             print()
+            slow_text("That is not a discovered location")
             print()
+            continue
 
-            for key, location in SCHOOL_MAP.items():
-                if key in discovered_locations:
-                    print(f"{key}: {location}")
-            space()
+        if map_teleport == "1":
+            discovered_locations.remove("1")
+            science_class()
+            break
 
-            map_teleport = input(f"{name}, where do you want to travel: ")
+        elif map_teleport == "2":
+            discovered_locations.remove("2")
+            school_gym()
+            break
 
-            if map_teleport not in discovered_locations:
-                print()
-                slow_text("That is not a discovered location")
-                print()
-                continue
+        elif map_teleport == "3":
+            discovered_locations.remove("3")
+            math_class()
+            break
 
-            if map_teleport == "1":
-                discovered_locations.remove("1")
-                science_class()
-                break
+        elif map_teleport == "4":
+            discovered_locations.remove("4")
+            AGC()
+            break
 
-            elif map_teleport == "2":
-                discovered_locations.remove("2")
-                school_gym()
-                break
-
-            elif map_teleport == "3":
-                discovered_locations.remove("3")
-                math_class()
-                break
-
-            elif map_teleport == "4":
-                discovered_locations.remove("4")
-                AGC()
-                break
-
-            else:
-                slow_text("You have to enter 1, 2 or 3.")
-                print()
+        else:
+            slow_text("You have to enter 1, 2 or 3.")
+            print()
 
 
 def class_laptop():
+    global name
     space()
     slow_text("-----------------------")
     print()
@@ -136,12 +138,13 @@ def class_laptop():
     slow_text("-----------------------")
     print()
     slow_text(f"Welcome {name}.")
-    space()
+    print()
     slow_text("After successfully logging into the laptop,")
     print()
     slow_text("you go into the Wellington College student portal to find your status...")
     print()
     status()
+    space()
 
 
 def get_available_options(all_options, searched_locations):
@@ -189,7 +192,10 @@ def status():
         except ValueError:
             slow_text("Enter an integer, ever 1, 2 or 3.")
             print()
+
 def cortisol_check():
+    global name
+
     print()
     if player_cortisol >= 100:
         slow_text(f"{name}, Your cortisol levels exceeded the limit and you pass out.")
@@ -225,6 +231,8 @@ def time_check():
 
 #Start/introduction functions
 def name_start():
+    global name
+
     slow_text("====WELLINGTON COLLEGE ESCAPE=====")
     space()
 
@@ -371,7 +379,7 @@ def tower_block_search():
 #sub-functions for towerblock
 #----------------------------
 def find_map_choice_1():
-    global player_cortisol
+    global player_cortisol, name
 
     slow_text("You walk over to the rubbish bin...")
     print()
@@ -435,7 +443,7 @@ def find_map_choice_2():
     show_map()
 
 def find_map_choice_3():
-    global player_time
+    global player_time, name
     slow_text("You walk over to the electronics storage system...")
     print()
     slow_text("It is overflowing with random electronic parts...")
@@ -484,8 +492,7 @@ def find_map_choice_3():
 
 #Science class
 def science_class():
-    global player_cortisol
-    global player_time
+    global player_cortisol, player_time, name
 
     space()
     slow_text("With the help of your map, you navigate your way through the school into the science block.")
@@ -546,6 +553,8 @@ def science_class():
             print()
             print(f"Very well then {name}, here is the rusty key fragment.")
             inventory.append("rusty_key_fragment")
+            print(inventory)
+            space()
             correct = True
         else:
             print("Wrong answer!!!")
@@ -610,15 +619,17 @@ def school_gym():
             dodge_streak = 0
     slow_text("The powerlifter clearly did not do enough cardio, so you slip right past him.")
     print()
-    slow_text("You enter the gym and the weighted key fragment is right there on the dumbel rack.")
+    slow_text("You enter the gym and the weighted key fragment is right there on the dumbbell rack.")
     print()
     inventory.append("weighted_key_fragment")
+    print(inventory)
+    space()
 
 
 
 #Math class
 def math_class():
-    global player_cortisol
+    global player_cortisol,name
 
     space()
     slow_text("With the help of your trusty map, you walk over to the math department...")
@@ -668,6 +679,9 @@ def math_class():
     slow_text("'here is the paper key that you will need for leaving.'")
 
     inventory.append("paper_key_fragment")
+    print(inventory)
+    space()
+
 
 
 #final location
