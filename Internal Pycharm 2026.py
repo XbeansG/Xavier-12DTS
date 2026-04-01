@@ -104,25 +104,25 @@ def show_map():
             discovered_locations.remove("1")
             if science_class():
                 return True
-            break
+
 
         elif map_teleport == "2":
             discovered_locations.remove("2")
             if school_gym():
                 return True
-            break
+
 
         elif map_teleport == "3":
             discovered_locations.remove("3")
             if math_class():
                 return True
-            break
+
 
         elif map_teleport == "4":
             discovered_locations.remove("4")
             if AGC():
                 return True
-            break
+
 
         else:
             slow_text("You have to enter 1, 2 or 3.")
@@ -367,17 +367,17 @@ def tower_block_search():
 
         if find_map ==1:
             space()
-            find_map_choice_1()
+            return find_map_choice_1()
 
 
         elif find_map == 2:
             space()
-            find_map_choice_2()
+            return find_map_choice_2()
 
 
         elif find_map == 3:
             space()
-            find_map_choice_3()
+            return find_map_choice_3()
 
 
 #sub-functions for towerblock with all 3 options where they can search for the map
@@ -419,7 +419,7 @@ def find_map_choice_1():
             space()
             loop_control = False
             space()
-            tower_block_search()
+            return tower_block_search()
 
 
         elif search_bin == 2:
@@ -428,7 +428,7 @@ def find_map_choice_1():
             slow_text(f"Smart decision {name}.")
             loop_control = False
             space()
-            tower_block_search()
+            return tower_block_search()
 
         else:
             print()
@@ -436,6 +436,7 @@ def find_map_choice_1():
             slow_text("You have to enter 1 or 2")
             loop_control = True
             #fix this
+
 def find_map_choice_2():
     slow_text("You walk over to the teacher's draws...")
     print()
@@ -445,7 +446,7 @@ def find_map_choice_2():
     print()
     slow_text("You unravel the paper to find that it is in fact the school map!!!")
     print()
-    show_map()
+    return show_map()
 
 def find_map_choice_3():
     global player_time, name
@@ -484,7 +485,7 @@ def find_map_choice_3():
                 return True
             loop_control = False
             space()
-            tower_block_search()
+            return tower_block_search()
 
         elif search_electronics == 2:
             print()
@@ -492,7 +493,7 @@ def find_map_choice_3():
             slow_text(f"You will see if that move pays off {name}...")
             loop_control = False
             space()
-            tower_block_search()
+            return tower_block_search()
 
         else:
             print()
@@ -583,7 +584,7 @@ def science_class():
     print()
     class_laptop()
     space()
-    show_map()
+    return show_map()
 
 
 #School gym
@@ -647,7 +648,7 @@ def school_gym():
     print(inventory)
     key_fragment_check()
     space()
-    show_map()
+    return show_map()
 
 
 
@@ -707,7 +708,7 @@ def math_class():
     print(inventory)
     key_fragment_check()
     space()
-    show_map()
+    return show_map()
 
 
 
