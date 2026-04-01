@@ -161,16 +161,13 @@ def status():
     while loop_control:
         try:
             slow_text("1. Cortisol level (Enter 1)")
-            print()
-            print()
+            space()
 
             slow_text("2. Current time (Enter 2)")
-            print()
-            print()
+            space()
 
             slow_text("3. Current inventory (Enter 3) ")
-            print()
-            print()
+            space()
 
             display_updated_status = int(input("Enter your choice: "))
 
