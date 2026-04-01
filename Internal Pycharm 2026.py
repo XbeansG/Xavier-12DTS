@@ -15,8 +15,8 @@ loop = True
 SCHOOL_MAP = {
     "1":"Science Class",
     "2":"School Gym",
-    "3":"Math Class"
-    #"4":"AGC" Create later
+    "3":"Math Class",
+    "4":"AGC"
 
 }
 
@@ -64,6 +64,10 @@ def slow_text(text: str, speed = 0.00004):
     for letter in text:
         print(letter, end = '')
         time.sleep(speed)
+
+def key_fragment_check():
+    if inventory == ["key"]
+        discovered_locations = {"4"}
 
 def space():
     print()
@@ -567,6 +571,8 @@ def science_class():
     slow_text("You walk over to a laptop...")
     print()
     class_laptop()
+    space()
+    show_map()
 
 
 #School gym
@@ -590,10 +596,10 @@ def school_gym():
 
     if "protein_powder" in inventory:
         slow_text("You chug the protein shake from earlier to improve your physical ability.")
-        reaction_time = 5
+        reaction_time = 7
         required_dodge_streak = 2
     else:
-        reaction_time = 3
+        reaction_time = 5
         required_dodge_streak = 3
     print()
     slow_text(f"You have to dodge {required_dodge_streak} attacks from the powerlifter to get past.")
@@ -624,6 +630,8 @@ def school_gym():
     inventory.append("weighted_key_fragment")
     print(inventory)
     space()
+    show_map()
+
 
 
 
@@ -681,6 +689,7 @@ def math_class():
     inventory.append("paper_key_fragment")
     print(inventory)
     space()
+    show_map()
 
 
 
