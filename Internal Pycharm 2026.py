@@ -405,10 +405,6 @@ def find_map_choice_1():
             print()
             slow_text("It is your lucky day though as you found a lab note.")
             inventory.append("lab_note")
-            print()
-            slow_text("Your luck does not run out when searching as you discover a protein shake for the gym.")
-            space()
-            inventory.append("protein_shake")
             space()
             loop_control = False
             space()
@@ -459,11 +455,11 @@ def find_map_choice_3():
             print()
             print()
             slow_text("You start moving electronics around in hope for the school map...")
-            print()
-            print()
-            slow_text("You instead find a calculator.")
-            inventory.append("calculator")
             space()
+
+            slow_text("You instead find a protein shake for the gym.")
+            space()
+            inventory.append("protein_shake")
 
             slow_text("You keep searching for the map, with a little hope left...")
             print()
@@ -608,6 +604,8 @@ def school_gym():
     slow_text(f"You have to dodge {required_dodge_streak} attacks from the powerlifter to get past.")
     print()
 
+    #this while loop makes player dodge a certain amount of times in a row with a certain amount of time,
+    # depending on if they have the protein shake or not
     while dodge_streak < required_dodge_streak:
         action = random.choice(actions)
         slow_text(f"Quick! Enter '{action}' within {reaction_time} to dodge!!!")
@@ -626,6 +624,7 @@ def school_gym():
             player_cortisol +=10
             cortisol_check()
             dodge_streak = 0
+
     slow_text("The powerlifter clearly did not do enough cardio, so you slip right past him.")
     print()
     slow_text("You enter the gym and the weighted key fragment is right there on the dumbbell rack.")
@@ -659,7 +658,6 @@ def math_class():
     print()
     slow_text("'You will keep repeating worksheets until you complete the objective.'")
     print()
-    #calc
     correct_math_streak = 0
     while correct_math_streak < 3:
         #create math question and answer for it
