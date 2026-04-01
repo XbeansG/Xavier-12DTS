@@ -177,14 +177,12 @@ def status():
             if display_updated_status == 1:
                 if cortisol_check():
                     return True
-                print()
-                print()
+                space()
                 loop_control = False
 
             elif display_updated_status == 2:
                 slow_text(f"The current time is {player_time}PM.")
-                print()
-                print()
+                space()
                 loop_control = False
 
             elif display_updated_status == 3:
@@ -256,8 +254,7 @@ def name_start():
     name = input("what is your name: ")
     print()
     slow_text(f"Very well then {name}.")
-    print()
-    print()
+    space()
 
 #gives player 3 options, ever starting straight away, getting an introduction then starting or just quit
 def start_menu():
@@ -312,7 +309,7 @@ def introduction():
     print()
     slow_text("so you can unlock the school gate before it clocks midnight...")
     print()
-    print(f"Good luck {name}.")
+    slow_text(f"Good luck {name}.")
     space()
 
 
@@ -388,8 +385,8 @@ def find_map_choice_1():
     slow_text("You walk over to the rubbish bin...")
     print()
     slow_text("but once you arrive there is a strange, rotten smell coming from it...")
-    print()
-    print()
+    space()
+
     loop_control = True
     while loop_control:
         try:
@@ -398,15 +395,14 @@ def find_map_choice_1():
             slow_text(f"Invalid choice, enter an integer.")
             continue
         if search_bin == 1:
-            print()
-            print()
+            space()
             slow_text("You start removing trash from the rubbish bin...")
             print()
             slow_text("Out of no where a rat jumps out of the bin and tries to attack you!!!")
             print()
             slow_text("You dodge just in time but your cortisol spikes!!!")
             print()
-            print()
+
             player_cortisol +=20
             if cortisol_check():
                 return True
@@ -417,25 +413,20 @@ def find_map_choice_1():
             slow_text("It is your lucky day though as you found a lab note.")
             inventory.append("lab_note")
             space()
-            loop_control = False
-            space()
             return tower_block_search()
 
 
         elif search_bin == 2:
-            print()
-            print()
-            slow_text(f"Smart decision {name}.")
-            loop_control = False
             space()
+            slow_text(f"Smart decision {name}.")
+            print()
             return tower_block_search()
 
         else:
-            print()
-            print()
+            space()
             slow_text("You have to enter 1 or 2")
+            print()
             loop_control = True
-            #fix this
 
 def find_map_choice_2():
     slow_text("You walk over to the teacher's draws...")
@@ -464,8 +455,7 @@ def find_map_choice_3():
             continue
 
         if search_electronics == 1:
-            print()
-            print()
+            space()
             slow_text("You start moving electronics around in hope for the school map...")
             space()
 
@@ -478,26 +468,22 @@ def find_map_choice_3():
             slow_text("Your hope is destroyed after searching the whole storage system.")
             print()
             slow_text("You leave the area in hopes to find the map somewhere else feeling pitiful.")
-            print()
-            print()
+            space()
             player_time +=1
             if time_check():
                 return True
-            loop_control = False
+
             space()
             return tower_block_search()
 
         elif search_electronics == 2:
-            print()
-            print()
-            slow_text(f"You will see if that move pays off {name}...")
-            loop_control = False
             space()
+            slow_text(f"You will see if that move pays off {name}...")
+            print()
             return tower_block_search()
 
         else:
-            print()
-            print()
+            space()
             slow_text("You have to enter 1 or 2")
             loop_control = True
 
