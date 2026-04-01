@@ -32,6 +32,7 @@ required_fragments = {"rusty_key_fragment", "weighted_key_fragment", "paper_key_
 
 #Variables:
 #----------
+name = ""
 discovered_locations = {"1","2","3"}
 inventory = []
 searched_locations = []
