@@ -102,22 +102,26 @@ def show_map():
 
         if map_teleport == "1":
             discovered_locations.remove("1")
-            science_class()
+            if science_class():
+                return True
             break
 
         elif map_teleport == "2":
             discovered_locations.remove("2")
-            school_gym()
+            if school_gym():
+                return True
             break
 
         elif map_teleport == "3":
             discovered_locations.remove("3")
-            math_class()
+            if math_class():
+                return True
             break
 
         elif map_teleport == "4":
             discovered_locations.remove("4")
-            AGC()
+            if AGC():
+                return True
             break
 
         else:
@@ -281,7 +285,7 @@ def start_menu():
                 loop_control = False
 
             elif start_menu_choice == 3:
-                return
+                return "quit"
 
             else:
                 slow_text("You have to enter 1, 2 or 3")
@@ -727,6 +731,7 @@ def AGC():
     print()
     slow_text(f"You step foot outside of the school, you are now free {name}")
     space()
+    return True
 
 
 
@@ -734,7 +739,11 @@ def AGC():
 #----------
 def main_loop():
     name_start()
-    start_menu()
+    menu_result = start_menu()
+
+    if menu_result == "quit":
+        return "quit"
+
     result = tower_block_search()
     return result
 
@@ -742,6 +751,9 @@ def main_loop():
 while True:
     reset_game()
     game_over = main_loop()
+
+    if game_over == "quit":
+        break
     if game_over:
         print("===GAME OVER===")
         space()
