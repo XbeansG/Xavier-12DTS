@@ -311,7 +311,8 @@ def tower_block_search():
 
     while True:
         available_options = get_available_options(all_options, searched_locations)
-        if not in available_options:
+
+        if not available_options:
             #if all locations searched exit loop
             break
 
@@ -333,21 +334,28 @@ def tower_block_search():
             find_map = int(input("Enter your choice on where you want to search for the school map: "))
         except ValueError:
             slow_text(f"Enter an integer from {available_options}")
+            space()
+            continue
 
-        if find_map:
-            searched_locations.append(1)
+        if find_map not in available_options:
+            slow_text(f"Enter an integer from {available_options}")
+            space()
+            continue
+
+        searched_locations.append(find_map)
+        space()
+
+        if find_map ==1:
             space()
             find_map_choice_1()
 
 
         elif find_map == 2:
-            searched_locations.append(2)
             space()
             find_map_choice_2()
 
 
         elif find_map == 3:
-            searched_locations.append(3)
             space()
             find_map_choice_3()
 
