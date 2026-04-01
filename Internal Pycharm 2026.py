@@ -686,8 +686,25 @@ def math_class():
 
 #final location
 def AGC():
+    global name
     space()
-    slow_text("With")
+    slow_text("With all the the key fragments found you make your way over to your final destination.")
+    space()
+    slow_text("You enter the AGC, you walk on to the stage where you find the holy key forge...")
+    print()
+    slow_text("You place all three key fragments ontop of the key forge...")
+    print()
+    slow_text("Your ears start ringing and your vision goes blurry...")
+    space()
+    slow_text("You wake up after passing out with a throbbing a headache...")
+    print()
+    slow_text("The key forge had done its magic, the holy gate key floats in the air...")
+    space()
+    slow_text("After arriving at the school gate you slot the holy gate key into it.")
+    print()
+    slow_text(f"You step foot outside of the school, you are now free {name}")
+    space()
+    exit()
 
 
 #Main Loop:
