@@ -7,8 +7,6 @@
 import time
 import random
 
-#loop for while loops ect
-loop = True
 
 #Constants:
 #----------
@@ -30,29 +28,17 @@ riddles = [
 
 actions = ["jump", "crouch", "dash left", "dash right"]
 
+required_fragments = {"rusty_key_fragment", "weighted_key_fragment", "paper_key_fragment"}
+
 #Variables:
 #----------
-discovered_locations = {"1","2","3"} #variable as 4th location is added later on
+discovered_locations = {"1","2","3"}
 inventory = []
 searched_locations = []
-available_options = []
-all_options = []
 
 player_time = 5 #expel time = 12
 player_cortisol = 0
-player_key = 0 # later on if player_key = 1 then KEY_ESCAPE_GATE = True
-correct_math_streak = 0
 
-
-name = ""
-display_updated_status = ""
-
-#Decision variables
-find_map = ""
-start_menu_choice = ""
-search_bin = ""
-search_electronics = ""
-map_teleport = ""
 
 #Functions:
 #---------
@@ -62,28 +48,30 @@ map_teleport = ""
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
 def slow_text(text: str, speed = 0.00004):
     for letter in text:
-        print(letter, end = '')
+        print(letter, end = '', flush = True)
         time.sleep(speed)
 
+def reset_game():
+    global inventory, player_cortisol, player_time, discovered_locations, searched_locations
+    inventory = []
+    player_cortisol = 0
+    player_time = 5
+    discovered_locations = {"1","2","3"}
+    searched_locations = []
+
 def key_fragment_check():
-    if inventory == ["key"]
-        discovered_locations = {"4"}
+    if all (item in inventory for item in required_fragments):
+        discovered_locations.add("4")
 
 def space():
     print()
     print()
     print()
-    print()
-def sleep_1_and_space():
-    print()
-    print()
-    time.sleep(1)
-def sleep_3_and_space():
-    print()
-    print()
-    time.sleep(3)
+
+
 
 def show_map():
+    key_fragment_check()
     while True:
         global name
         slow_text("====School Map====")
@@ -152,8 +140,8 @@ def class_laptop():
 
 
 def get_available_options(all_options, searched_locations):
-    global available_options
     return [option for option in all_options if option not in searched_locations]
+
 def status():
     loop_control = True
     while loop_control:
@@ -166,7 +154,7 @@ def status():
             print()
             print()
 
-            slow_text("4. Current inventory (Enter 3) ")
+            slow_text("3. Current inventory (Enter 3) ")
             print()
             print()
 
@@ -190,7 +178,7 @@ def status():
                 loop_control = False
 
             else:
-                slow_text("You have to enter 1, 2 or 3.")
+                slow_text("Enter an integer, ever 1, 2 or 3.")
                 print()
 
         except ValueError:
@@ -242,15 +230,12 @@ def name_start():
 
     slow_text("Before you play the best game of your life I need to know 1 thing from you...")
     print()
-    #time.sleep(1)
     name = input("what is your name: ")
-    #time.sleep(1)
     print()
-    #time.sleep(1)
     slow_text(f"Very well then {name}.")
-    #time.sleep(3)
     print()
     print()
+
 def start_menu():
     loop_control = True
 
@@ -290,10 +275,9 @@ def start_menu():
             print()
 
 def introduction():
-    #time.sleep(2)
+    global name
     slow_text("First of all you will need to understand the situation you are placed in...")
     print()
-    #time.sleep(1)
     slow_text("The current time is 5:30PM.")
     print()
     slow_text("You slept through last period and the teacher left you behind...")
@@ -306,79 +290,67 @@ def introduction():
     print()
     slow_text("so you can unlock the school gate before it clocks midnight...")
     print()
-    #time.sleep(1)
     print(f"Good luck {name}.")
     print()
     print()
     print()
-    #time.sleep(3)
 
 
 #levels
 #------
 #tower block
 #-----------
-def tower_block():
+def tower_block_search():
+    global searched_locations
+    all_options = [1,2,3]
+
     slow_text("You wake up in first floor of tower block.")
     print()
     slow_text("you are inside a tech classroom, quickly search the class for a school map before you are found...")
-    print()
-    print()
-    tower_block_search()
-def tower_block_search():
-    loop_control = True
-    all_options = [1,2,3]
-    while loop_control:
+    space()
+
+    while True:
+        available_options = get_available_options(all_options, searched_locations)
+        if not in available_options:
+            #if all locations searched exit loop
+            break
+
+        options_text = ",".join(str(option) for option in available_options)
+        slow_text(f"Available options: {options_text}:")
+        space()
+
+        if 1 not in searched_locations:
+            slow_text("1. Search the rubbish bin (Enter 1)")
+            space()
+
+        if 2 not in searched_locations:
+            slow_text("2. Search the teacher's drawers (Enter 2)")
+            space()
+        if 3 not in searched_locations:
+            slow_text("3. Search the electronics storage system (Enter 3) ")
+            space()
         try:
-            available_options = get_available_options(all_options, searched_locations)
-            options_text = ",".join(str(option) for option in available_options)
-
-            if 1 not in searched_locations:
-                slow_text("1. Search the rubbish bin (Enter 1)")
-                print()
-                print()
-
-            if 2 not in searched_locations:
-                slow_text("2. Search the teacher's draws (Enter 2)")
-                print()
-                print()
-
-            if 3 not in searched_locations:
-                slow_text("3. Search the electronics storage system (Enter 3) ")
-                print()
-                print()
-
             find_map = int(input("Enter your choice on where you want to search for the school map: "))
-
-            if find_map == 1 and 1 not in searched_locations:
-                searched_locations.append(1)
-                print()
-                print()
-                find_map_choice_1()
-                loop_control = False
-
-            elif find_map == 2 and 2 not in searched_locations:
-                searched_locations.append(2)
-                print()
-                print()
-                find_map_choice_2()
-                loop_control = False
-
-            elif find_map == 3 and 3 not in searched_locations:
-                searched_locations.append(3)
-                print()
-                print()
-                find_map_choice_3()
-                loop_control = False
-            elif len(searched_locations) == 3:
-                loop_control = False
-
-            else:
-                slow_text(f"You have to enter {available_options}")
-                print()
         except ValueError:
-            slow_text(f"Enter an integer, ever {available_options}")
-            print()
+            slow_text(f"Enter an integer from {available_options}")
+
+        if find_map:
+            searched_locations.append(1)
+            space()
+            find_map_choice_1()
+
+
+        elif find_map == 2:
+            searched_locations.append(2)
+            space()
+            find_map_choice_2()
+
+
+        elif find_map == 3:
+            searched_locations.append(3)
+            space()
+            find_map_choice_3()
+
 
 #sub-functions for towerblock
 #----------------------------
@@ -392,7 +364,11 @@ def find_map_choice_1():
     print()
     loop_control = True
     while loop_control:
-        search_bin = int(input("Enter (1) if you still want to search bin, or enter (2) if you want to search somewhere else: "))
+        try:
+            search_bin = int(input("Enter (1) if you still want to search bin, or enter (2) if you want to search somewhere else: "))
+        except ValueError:
+            slow_text(f"Invalid choice, enter an integer.")
+            continue
         if search_bin == 1:
             print()
             print()
@@ -410,11 +386,11 @@ def find_map_choice_1():
             slow_text("You go back to the bin, but find no map.")
             print()
             slow_text("It is your lucky day though as you found a lab note.")
-            inventory.append("lab note")
+            inventory.append("lab_note")
             print()
             slow_text("Your luck does not run out when searching as you discover a protein shake for the gym.")
             space()
-            inventory.append("protein shake")
+            inventory.append("protein_shake")
             space()
             loop_control = False
             space()
@@ -454,18 +430,24 @@ def find_map_choice_3():
     print()
     loop_control = True
     while loop_control:
-        search_electronics = int(input("Enter (1) if you still want to search the electronics storage system, or enter (2) if you want to search somewhere else: "))
+        try:
+            search_electronics = int(input("Enter (1) if you still want to search the electronics storage system, or enter (2) if you want to search somewhere else: "))
+
+        except ValueError:
+            slow_text(f"Invalid choice, enter 1 or 2.")
+            continue
+
         if search_electronics == 1:
             print()
             print()
-            slow_text("You start move electronics round in hope for the school map...")
+            slow_text("You start moving electronics around in hope for the school map...")
             print()
             print()
             slow_text("You instead find a calculator.")
             inventory.append("calculator")
             space()
 
-            slow_text("You keep searching for the map, with a dribble of hope left..")
+            slow_text("You keep searching for the map, with a little hope left...")
             print()
             slow_text("Your hope is destroyed after searching the whole storage system.")
             print()
@@ -518,7 +500,7 @@ def science_class():
     print()
     slow_text("You see a chest in the corner of the room so you make your way over..")
     space()
-    slow_text("'What brings you hear?', the chest asks.")
+    slow_text("'What brings you here?', the chest asks.")
     print()
     slow_text("'W-w-well I am looking for a rusty key fragment.'")
     print()
@@ -558,6 +540,7 @@ def science_class():
             print(f"Very well then {name}, here is the rusty key fragment.")
             inventory.append("rusty_key_fragment")
             print(inventory)
+            key_fragment_check()
             space()
             correct = True
         else:
@@ -594,7 +577,7 @@ def school_gym():
     slow_text("You think to yourself 'a key fragment must be in here, I must get past him'.")
     space()
 
-    if "protein_powder" in inventory:
+    if "protein_shake" in inventory:
         slow_text("You chug the protein shake from earlier to improve your physical ability.")
         reaction_time = 7
         required_dodge_streak = 2
@@ -629,6 +612,7 @@ def school_gym():
     print()
     inventory.append("weighted_key_fragment")
     print(inventory)
+    key_fragment_check()
     space()
     show_map()
 
@@ -688,6 +672,7 @@ def math_class():
 
     inventory.append("paper_key_fragment")
     print(inventory)
+    key_fragment_check()
     space()
     show_map()
 
@@ -721,9 +706,15 @@ def AGC():
 def main_loop():
     name_start()
     start_menu()
-    tower_block()
-    #make an intro status()
+    tower_block_search()
 
 #running game
-main_loop()
+while True:
+    print("===GAME OVER===")
+    space()
+    reset_game()
+    main_loop()
+    restart = input("Do you want to restart? (enter y or n): ").lower()
+    if restart != "y":
+        break
 
