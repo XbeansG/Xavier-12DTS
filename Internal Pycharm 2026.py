@@ -52,7 +52,7 @@ player_cortisol = 0
 #Set up section of code
 #-----------------------------
 #function for printed text individually types a letter at a time. Speed will be set to 0.02 when finished
-def slow_text(text: str, speed = 0.00004):
+def slow_text(text: str, speed = 0.04):
     for letter in text:
         print(letter, end = '', flush = True)
         time.sleep(speed)
@@ -87,6 +87,7 @@ def show_map():
         print()
         print()
 
+        #checks player's map locations
         for key, location in SCHOOL_MAP.items():
             if key in discovered_locations:
                 print(f"{key}: {location}")
@@ -199,6 +200,7 @@ def status():
 def cortisol_check():
     global name
 
+    #player loses when this if statement is true
     print()
     if player_cortisol >= 100:
         slow_text(f"{name}, Your cortisol levels exceeded the limit and you pass out.")
@@ -217,6 +219,7 @@ def cortisol_check():
 #shows the current time for player or ends game if player's time reaches 12
 def time_check():
     print()
+    #player loses if this statement is true
     if player_time >= 12:
         slow_text("Tick, tock")
         print()
@@ -425,6 +428,7 @@ def find_map_choice_1():
             print()
             loop_control = True
 
+#player gets map from this option
 def find_map_choice_2():
     slow_text("You walk over to the teacher's draws...")
     print()
@@ -436,6 +440,7 @@ def find_map_choice_2():
     print()
     return show_map()
 
+#player finds protein shake if they fully search
 def find_map_choice_3():
     global player_time, name
     slow_text("You walk over to the electronics storage system...")
@@ -742,7 +747,7 @@ while True:
         print("===GAME OVER===")
         space()
 
-
+    #option if they want to restart or not
     restart = input("Do you want to restart? (enter y or n): ").lower()
     if restart != "y":
         break
